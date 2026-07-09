@@ -1,0 +1,103 @@
+.panel-gestion-usuarios {
+  padding: 1.5rem;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.panel-header h2 {
+  margin: 0 0 0.25rem;
+  color: #0f172a;
+}
+
+.panel-header p {
+  margin: 0;
+  color: #64748b;
+}
+
+.filtros {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+}
+
+.paginacion {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.paginacion button {
+  background: #2563eb;
+}
+
+.tabla-usuarios {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+thead tr {
+  background: #eff6ff;
+  border-bottom: 2px solid #dbeafe;
+}
+
+thead th {
+  padding: 0.85rem;
+  color: #1d4ed8;
+}
+
+tbody tr {
+  border-bottom: 1px solid #e2e8f0;
+  background: transparent;
+}
+
+tbody td {
+  padding: 0.85rem;
+}
+
+tbody tr:hover {
+  background: #f8fafc;
+}
+
+tr button,
+tr a {
+  margin-right: 0.35rem;
+  background: #2563eb;
+  color: white;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+td.sin-resultados {
+  padding: 0.85rem;
+  text-align: center;
+  font-style: italic;
+  color: #64748b;
+}
+
+tbody tr.mejor-portfolio {
+  background: #fef3c7;
+  font-weight: 600;
+}
+
+input[type="text"] {
+  width: 250px;
+}

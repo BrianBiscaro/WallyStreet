@@ -1,0 +1,140 @@
+.panel {
+  padding: 1.5rem;
+}
+
+.panel-search {
+  margin-bottom: 1rem;
+}
+
+.panel-search input {
+  width: min(320px, 100%);
+  padding: 0.7rem;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+}
+
+.assets-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.panel-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
+  border-radius: 16px;
+  padding: 1rem;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+  border: 1px solid #e2e8f0;
+}
+
+.panel-card h4,
+.panel-card p {
+  margin: 0.2rem 0;
+}
+
+.panel-card h4 {
+  color: #0f172a;
+}
+
+.panel-card p {
+  color: #475569;
+}
+
+.panel-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.75rem;
+}
+
+.panel-actions input {
+  width: 80px;
+  padding: 0.5rem;
+}
+
+.panel-actions button {
+  padding: 0.6rem 0.8rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #2563eb;
+  color: white;
+}
+
+.history-panel {
+  margin-top: 1rem;
+  padding: 0.95rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+}
+
+.history-panel h5 {
+  margin: 0 0 0.75rem;
+  font-size: 0.95rem;
+  color: #0f172a;
+}
+
+.history-bars {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.45rem;
+  min-height: 205px;
+  padding: 0.45rem 0 0.2rem;
+  overflow-x: auto;
+}
+
+.history-bar-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  flex: 1 1 0;
+  min-width: 62px;
+  max-width: 90px;
+  padding-top: 0.15rem;
+}
+
+.history-bar {
+  width: 100%;
+  min-height: 24px;
+  background: linear-gradient(180deg, #38bdf8 0%, #2563eb 100%);
+  border-radius: 10px 10px 0 0;
+  box-shadow: inset 0 -2px 0 rgba(255, 255, 255, 0.25);
+  flex-shrink: 0;
+  position: relative;
+}
+
+.history-bar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.24), transparent);
+  border-radius: inherit;
+}
+
+.history-bar-label,
+.history-price {
+  font-size: 0.72rem;
+  text-align: center;
+  line-height: 1.2;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.history-bar-label {
+  color: #475569;
+  margin-top: 0.2rem;
+}
+
+.history-price {
+  font-weight: 700;
+  color: #0f172a;
+  background: rgba(255, 255, 255, 0.98);
+  padding: 0.16rem 0.32rem;
+  border-radius: 999px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+  z-index: 1;
+  white-space: normal;
+}
