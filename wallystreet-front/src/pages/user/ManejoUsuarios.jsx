@@ -50,7 +50,15 @@ const ManejoUsuarios = () => {
     return filtrados;
   }, [usuarios, filtroNombre, criterioOrden]);
 
-  const mejorUsuario = usuariosFiltrados[0] || null;
+  const mejorUsuario = useMemo(() => {
+    if (!usuarios || usuarios.length === 0) return null;
+
+    return usuarios.reduce((maximo, usuarioActual) => {
+      return (usuarioActual.portfolio_total || 0) > (maximo.portfolio_total || 0)
+        ? usuarioActual
+        : maximo;
+    });
+  }, [usuarios]);
   const totalPaginas = Math.max(
     1,
     Math.ceil(usuariosFiltrados.length / usuariosPorPagina),

@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import {
   loginService,
   logoutService,
@@ -12,7 +12,9 @@ const getStoredUser = () => {
     const expiresAt = localStorage.getItem("expires_at");
 
     if (expiresAt && new Date().getTime() > new Date(expiresAt).getTime()) {
-      localStorage.clear();
+      localStorage.removeItem("user_data");
+      localStorage.removeItem("token");
+      localStorage.removeItem("expires_at");
       return null;
     }
 
@@ -22,40 +24,16 @@ const getStoredUser = () => {
   }
 };
 
-const normalizeError = (error, fallbackMessage) => {
-  if (error?.response?.data?.message) {
-    return {
-      status: error.response.status || 500,
-      message: error.response.data.message,
-    };
-  }
-
-  if (error?.message) {
-    return {
-      status: error.status || 500,
-      message: error.message,
-    };
-  }
-
-  return {
-    status: 500,
-    message: fallbackMessage,
-  };
-};
-
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(getStoredUser);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const updateUserBalance = (delta) => {
+  const updateUserBalance = useCallback((delta) => {
     setUser((prevUser) => {
       if (!prevUser) return prevUser;
 
-      const nextBalance = Math.max(
-        0,
-        Number(prevUser.balance || 0) + Number(delta || 0),
-      );
+      const nextBalance = Math.max(0, Number(prevUser.balance || 0) + Number(delta || 0));
       const updatedUser = {
         ...prevUser,
         balance: Number(nextBalance.toFixed(2)),
@@ -64,9 +42,9 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem("user_data", JSON.stringify(updatedUser));
       return updatedUser;
     });
-  };
+  }, []);
 
-  const updateUserProfile = (updatedFields) => {
+  const updateUserProfile = useCallback((updatedFields) => {
     setUser((prevUser) => {
       if (!prevUser) return prevUser;
 
@@ -78,60 +56,65 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem("user_data", JSON.stringify(updatedUser));
       return updatedUser;
     });
-  };
+  }, []);
 
-  const register = async (credentials) => {
+  const register = useCallback(async (credentials) => {
     setLoading(true);
     setError(null);
     try {
       await registerService(credentials);
       return true;
-    } catch (error) {
-      setError(normalizeError(error, "No se pudo completar el registro."));
+    } catch (err) {
+      setError(err);
       return false;
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  const login = async (credentials) => {
+  const login = useCallback(async (credentials) => {
     setLoading(true);
     setError(null);
     try {
       const data = await loginService(credentials);
-      const loggedUser = data.user || data;
+      const loggedUser = data.user;
 
-      setUser(loggedUser);
       localStorage.setItem("token", data.token);
       localStorage.setItem("expires_at", data.expires_at);
       localStorage.setItem("user_data", JSON.stringify(loggedUser));
 
+      setUser(loggedUser);
       return true;
-    } catch (error) {
-      setError(normalizeError(error, "Credenciales inválidas."));
+    } catch (err) {
+      setError(err);
       return false;
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  const logout = async () => {
+  const logout = useCallback(async () => {
     setLoading(true);
     setError(null);
     try {
-      await logoutService();
+      const expiresAt = localStorage.getItem("expires_at");
+      const isAlive = expiresAt && new Date().getTime() <= new Date(expiresAt).getTime();
+
+      if (isAlive) {
+        await logoutService();
+      }
       return true;
-    } catch (error) {
-      setError(normalizeError(error, "No se pudo cerrar la sesión."));
+    } catch (err) {
+      console.error("Sesión terminada con error de red/autorización");
       return false;
     } finally {
-      setUser(null);
       localStorage.removeItem("token");
       localStorage.removeItem("expires_at");
       localStorage.removeItem("user_data");
+      setUser(null);
       setLoading(false);
     }
-  };
+  }, []);
 
   const value = useMemo(
     () => ({
@@ -144,7 +127,7 @@ export const AuthProvider = ({ children }) => {
       loading,
       error,
     }),
-    [user, loading, error],
+    [user, register, login, logout, updateUserBalance, updateUserProfile, loading, error],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

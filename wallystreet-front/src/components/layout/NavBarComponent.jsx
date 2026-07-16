@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useAssetContext } from "../../context/asset/useAssetContext";
 import { useAuth } from "../../context/auth/useAuth";
 import usePortfolioContext from "../../context/portfolio/usePortfolioContext";
+import "./Layout.css";
 
 const NavBarComponent = () => {
   const { user, logout } = useAuth();
@@ -33,7 +34,7 @@ const NavBarComponent = () => {
       <>
         <div className="welcome-msg">
           <p>Hola, {user.name}</p>
-          <p>Valor Portfolio: ${portfolio?.total_value}</p>
+          <p>Valor Portfolio: ${Number(portfolio?.total_value).toFixed(2)}</p>
         </div>
         <div className="navbar-links">
           <Link to="/portfolio">Mi Porfolio</Link>

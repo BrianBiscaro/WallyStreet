@@ -72,26 +72,7 @@ const UserProvider = ({ children }) => {
     }
   };
 
-  /*  const getPortfolio = async () => {
-    try {
-      const data = await getPortfolio();
-      return setUs(data);
-    } catch (error) {
-      setError(error);
-    } finally {
-      loading(false);
-    }
-  };
-  const deletePortfolio = async () => {
-    try {
-      const data = await deletePortfolio();
-      return data; // Actualizar el portfolio sin el asset eliminado
-    } catch (error) {
-      setError(error);
-    } finally {
-      setLoading(false);
-    }
-  }; */
+
   const getTransactions = async () => {
     try {
       const data = await getTransactions();
@@ -111,8 +92,6 @@ const UserProvider = ({ children }) => {
     updateUserData,
     fetchUsers,
     getTransactions,
-    /*   getPortfolio,
-    deletePortfolio, */
   };
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };

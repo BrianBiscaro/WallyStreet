@@ -19,8 +19,6 @@ const EditarUsuario = () => {
   const [loading, setLoading] = useState(false);
   const [loadingUser, setLoadingUser] = useState(!isEditingSelf);
 
-  // Si el admin está editando a otro usuario, hay que traer sus datos:
-  // el formulario no puede precargarse con los datos del propio admin.
   useEffect(() => {
     if (isEditingSelf) return;
 
@@ -36,8 +34,8 @@ const EditarUsuario = () => {
         if (!cancelado) {
           setMessage(
             error?.response?.data?.message ||
-              error?.message ||
-              "No se pudieron cargar los datos del usuario.",
+            error?.message ||
+            "No se pudieron cargar los datos del usuario.",
           );
         }
       } finally {
@@ -121,8 +119,8 @@ const EditarUsuario = () => {
     } catch (error) {
       setMessage(
         error?.response?.data?.message ||
-          error?.message ||
-          "No se pudo actualizar el usuario.",
+        error?.message ||
+        "No se pudo actualizar el usuario.",
       );
     } finally {
       setLoading(false);

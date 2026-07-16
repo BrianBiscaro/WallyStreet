@@ -1,9 +1,5 @@
-/*
- HeaderComponent: el cual debe contener un logo que identifique su página (puede ser una imagen de internet o creada) y un título
-*/
-
 import { Link } from "react-router-dom";
-import "./HeaderComponent.css";
+import "./Layout.css";
 import NavBarComponent from "./NavBarComponent";
 
 const HeaderComponent = () => {

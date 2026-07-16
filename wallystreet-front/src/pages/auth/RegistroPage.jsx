@@ -1,15 +1,3 @@
-/**
- * Crear un archivo dentro de la carpeta pages/registro llamado RegistroPage. Dicha página debe contener un formulario con:
- * ● Email (formato email y único)
- * ● Nombre del usuario (será público)
- * ● Password (type password)
- * El usuario podrá registrarse para luego iniciar la sesión en el sitio web. Tenga en cuenta que deberá validar que:
- * ● El email debe tener un formato válido y, se debe verificar que no esté en uso.
- * ● El nombre de usuario no puede ser vacío y debe tener como máximo 30 caracteres.
- * ● La password tenga por lo menos 8 caracteres y que tenga mayúsculas, minúsculas, números y caracteres especiales.
- * Estas validaciones son independientes de las que realice el backend. En caso de error se debe informar cual o cuales validaciones fallaron para que el usuario pueda solucionarlo (si está dentro de sus posibilidades, por ejemplo, formato de la contraseña, el email ya existe, etc).
- */
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/auth/useAuth";
@@ -84,11 +72,16 @@ const RegistroPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage("");
+
     if (validateEmail() && validatePassword() && validateName()) {
       const exito = await register({ email, name, password });
       if (exito) {
-        setMessage("Registro correcto. Ahora podés iniciar sesión.");
-        navigate("/login");
+        setMessage("Registro correcto. Serás redirigido para iniciar sesión...");
+
+
+        setTimeout(() => {
+          navigate("/login");
+        }, 2000);
       }
     }
   };

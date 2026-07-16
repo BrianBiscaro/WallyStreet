@@ -9,9 +9,7 @@ const Asset = ({ asset }) => {
   const [cantVenta, setCantVenta] = useState(0);
   const [message, setMessage] = useState("");
 
-  const maxCompra = Math.min(
-    20,
-    Math.max(0, Math.floor((user?.balance || 0) / (asset.current_price || 1))),
+  const maxCompra = Math.min(20, Math.max(0, Math.floor((user?.balance || 0) / (asset.current_price || 1))),
   );
 
   const comprar = async () => {
@@ -97,28 +95,51 @@ const Asset = ({ asset }) => {
         <div className="control-group">
           <button
             onClick={comprar}
-            disabled={user?.balance === 0 || maxCompra <= 0}
+            disabled={user?.balance === 0 || maxCompra <= 0 || cantCompra <= 0 || cantCompra > maxCompra}
           >
             Comprar
           </button>
           <input
             type="number"
             min="0"
+            max={maxCompra}
             value={cantCompra}
-            onChange={(event) => setCantCompra(event.target.value)}
+            onChange={(e) => {
+              const val = Number(e.target.value);
+              if (val <= maxCompra) setCantCompra(val);
+            }}
           />
+
+          {cantCompra > 0 && (
+            <span>
+              Costo: ${(cantCompra * asset.current_price).toFixed(2)}
+            </span>
+          )}
         </div>
 
         <div className="control-group">
-          <button onClick={vender} disabled={asset.quantity <= 0}>
+          <button
+            onClick={vender}
+            disabled={asset.quantity <= 0 || cantVenta <= 0 || cantVenta > asset.quantity}
+          >
             Vender
           </button>
           <input
             type="number"
             min="0"
+            max={asset.quantity}
             value={cantVenta}
-            onChange={(event) => setCantVenta(event.target.value)}
+            onChange={(event) => {
+              const val = Number(event.target.value);
+              if (val <= asset.quantity) setCantVenta(val);
+            }}
           />
+          {/* Mostramos el retorno en tiempo real */}
+          {cantVenta > 0 && (
+            <span>
+              Obtienes: ${(cantVenta * asset.current_price).toFixed(2)}
+            </span>
+          )}
         </div>
 
         <button
@@ -131,7 +152,7 @@ const Asset = ({ asset }) => {
       </div>
 
       {message && <p className="portfolio-message">{message}</p>}
-    </div>
+    </div >
   );
 };
 

@@ -15,8 +15,8 @@ class AssetController extends BaseController
      * GET /assets: Lista activos (Oro, Plata, YPF, etc.) con su precio actual de acuerdo a los parámetros de búsqueda. Si no hay parámetros debe devolver todos los registros. No requiere login.
      * ○ Filtros opcionales:
      * ■ ?type={name}
-     * ■ min_price: Precio mínimo (ej: ?min_price=50).
-     * ■ max_price: Precio máximo (ej: ?max_price=500).
+     * ■ min_price: Precio mínimo (ej: ?min_price=50)
+     * ■ max_price: Precio máximo (ej: ?max_price=500)
      */
     public function getAssets(Request $request, Response $response): Response
     {

@@ -30,32 +30,29 @@ const PortfolioProvider = ({ children }) => {
     }
   }, []);
 
-  const deleteAsset = useCallback(
-    async (asset_id) => {
-      try {
-        setLoading(true);
-        await deletePortfolio(asset_id);
-        await fetchPortfolio();
-        setError(null);
-        return true;
-      } catch (error) {
-        setError(error);
-        return false;
-      } finally {
-        setLoading(false);
-      }
-    },
+  const deleteAsset = useCallback(async (asset_id) => {
+    try {
+      setLoading(true);
+      await deletePortfolio(asset_id);
+      await fetchPortfolio();
+      setError(null);
+      return true;
+    } catch (error) {
+      setError(error);
+      return false;
+    } finally {
+      setLoading(false);
+    }
+  },
     [fetchPortfolio],
   );
 
   const fetchTransactions = useCallback(async () => {
     try {
       setLoading(true);
-      const data = await getTransactions();
-      setTransactions(
-        Array.isArray(data?.transactions) ? data.transactions : [],
-      );
       setError(null);
+      const data = await getTransactions();
+      setTransactions(data.transactions);
       return true;
     } catch (error) {
       setError(error);
@@ -69,7 +66,7 @@ const PortfolioProvider = ({ children }) => {
     const loadPortfolio = async () => {
       if (user) {
         await fetchPortfolio();
-        fetchTransactions();
+        await fetchTransactions();
       } else {
         setPortfolio({});
         setTransactions([]);

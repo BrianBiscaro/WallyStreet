@@ -170,3 +170,10 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+
+input:focus, select:focus {
+  outline: none;
+  border-color: #2563eb; /* Azul acorde a tus botones */
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2); /* Halo de color alrededor */
+  transition: all 0.2s ease-in-out;
+}

@@ -14,7 +14,7 @@ class DB
         if (!self::$connection) {
             $host = getenv('DB_HOST') ?: 'db';
             $dbname = getenv('DB_NAME') ?: 'seminariophp';
-            $user = getenv('DB_USER') ?: 'otrojaja';
+            $user = getenv('DB_USER') ?: 'seminariophp';
             $pass = getenv('DB_PASS') ?: 'seminariophp';
 
             self::$connection = new PDO(

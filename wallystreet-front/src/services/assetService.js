@@ -11,8 +11,10 @@ import api from "../api/api";
  * }>
  * }} Lista de Activos
  */
-export const getAssets = async () => {
-  const response = await api.get("/assets");
+
+export const getAssets = async (queryParams) => {
+  console.log(queryParams);
+  const response = await api.get("/assets", { params: queryParams });
   return response.data;
 };
 

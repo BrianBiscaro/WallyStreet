@@ -5,3 +5,66 @@
   background-color: #f0f0f0;
 
 }
+
+/* Modal Sesión Expirada */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 23, 42, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 90%;
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  color: #dc2626; /* Rojo para destacar el error */
+}
+
+.modal-content button {
+  margin-top: 1.5rem;
+  padding: 0.7rem 1.5rem;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.modal-content button:hover {
+  background: #1d4ed8;
+}
+
+/* Clases para tendencias de mercado */
+.flecha-tendencia {
+  margin-left: 6px;
+  font-weight: bold;
+}
+
+.tendencia-alta {
+  color: #16a34a;
+}
+
+.tendencia-baja {
+  color: #dc2626;
+}
+
+.tendencia-igual {
+  color: #64748b;
+}

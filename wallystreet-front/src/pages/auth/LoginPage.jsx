@@ -51,7 +51,7 @@ const LoginPage = () => {
           </button>
         </div>
 
-        {error && <p className="error-message">{error.message}</p>}
+        {error && <p className="error-message">Credenciales Inválidas</p>}
 
         <button type="submit">{loading ? "Ingresando..." : "Login"}</button>
       </form>

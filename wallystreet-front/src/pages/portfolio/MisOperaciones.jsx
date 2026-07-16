@@ -1,7 +1,3 @@
-/**
- * Se mostrará un historial de las operaciones realizadas por el usuario. Dicho historial se podrá filtrar por asset y tipo de operación. La información debe presentarse de manera que sea sencilla y autoexplicativa para el usuario.
- */
-
 import { useMemo, useState } from "react";
 import usePortfolioContext from "../../context/portfolio/usePortfolioContext";
 import "./MisOperaciones.css";
@@ -12,10 +8,9 @@ const MisOperaciones = () => {
   const [tipoOperacion, setTipoOperacion] = useState("all");
 
   const historialFiltrado = useMemo(() => {
-    const filtradas =
-      transactions?.filter((act) =>
-        act.asset_name?.toLowerCase().includes(filtro.toLowerCase()),
-      ) || [];
+    const filtradas = transactions?.filter((act) =>
+      act.asset_name?.toLowerCase().includes(filtro.toLowerCase()),
+    ) || [];
 
     if (tipoOperacion === "all") {
       return filtradas;
@@ -70,9 +65,8 @@ const MisOperaciones = () => {
           historialFiltrado.map((act) => (
             <div
               key={act.id}
-              className={`transaccion ${
-                act.type === "buy" ? "transaccion-buy" : "transaccion-sell"
-              }`}
+              className={`transaccion ${act.type === "buy" ? "transaccion-buy" : "transaccion-sell"
+                }`}
             >
               <div className="transaccion-header">
                 <h3>{act.asset_name}</h3>

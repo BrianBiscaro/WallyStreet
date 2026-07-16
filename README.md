@@ -78,14 +78,14 @@ cp wallystreet-front/.env.dist wallystreet-front/.env
 El sistema requiere la creación de un volumen externo para garantizar la persistencia de los datos del mercado y los usuarios:
 
 ```bash
-docker volume create wallystreet
+docker volume create seminariophp
 ```
 
 **3. Iniciar la infraestructura**
 Ejecuta el siguiente comando en la raíz del proyecto para construir las imágenes y levantar el stack completo (Frontend, API, Base de Datos y phpMyAdmin):
 
 ```Bash
-docker-compose up -d --build
+docker compose up -d 
 ```
 
 Para detener la aplicación y apagar los contenedores, ejecuta `docker-compose down` desde la misma ubicación.

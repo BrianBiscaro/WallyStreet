@@ -22,6 +22,7 @@ class Asset
             if (!is_numeric($filters['min_price'])) {
                 throw new BadRequestException('El parámetro min_price debe ser numérico.');
             }
+            
             $conditions[] = 'current_price >= :min_price';
             $params[':min_price'] = (float)$filters['min_price'];
         }
