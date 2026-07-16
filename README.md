@@ -89,6 +89,7 @@ docker compose up -d
 ```
 
 Para detener la aplicación y apagar los contenedores, ejecuta `docker-compose down` desde la misma ubicación.
+Para eliminar 
 
 🌐 Acceso a los Servicios
 Una vez que los contenedores reporten estar en ejecución, los servicios estarán disponibles en los siguientes puertos locales:
